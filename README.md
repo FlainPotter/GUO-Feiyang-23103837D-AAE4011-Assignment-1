@@ -10,7 +10,7 @@ This project implements a ROS-based vehicle detection pipeline that reads camera
 
 ---
 
-## 2. Detection Method *(Q3.1 — 2 marks)*
+## 2. Detection Method 
 
 **Model:** YOLOv8 (Ultralytics), pretrained on COCO, using the nano variant (`yolov8n.pt`) by default.
 
@@ -54,7 +54,7 @@ aae4011_vehicle_detection/
 
 ---
 
-## 5. How to Run *(Q3.1 — 2 marks)*
+## 5. How to Run 
 
 1. **Clone the repository** (or copy the package into your catkin workspace):
    ```bash
@@ -115,32 +115,32 @@ aae4011_vehicle_detection/
 
 ---
 
-## 7. Video Demonstration *(Q3.2 — 5 marks)*
+## 7. Video Demonstration 
 
-**Video Link:** [YouTube (Unlisted)](https://youtu.be/JiUkYiSbrw4)
+**Video Link:** [YouTube](https://youtu.be/JiUkYiSbrw4)
 
-The video (1–3 min) shows:
+The video (3 mins) shows:
 - (a) Launching the ROS package (e.g. running the GUI node and selecting a bag).
 - (b) The UI displaying detection results (progress bar, time, bounding boxes, labels, confidence, statistics).
 - (c) A brief explanation of the results (what is detected, how the controls work).
 
 ---
 
-## 8. Reflection & Critical Analysis *(Q3.3 — 8 marks, 300–500 words)*
+## 8. Reflection & Critical Analysis 
 
-### (a) What Did You Learn? *(2 marks)*
+### (a) What Did You Learn? 
 
 I gained two main technical skills. First, I learned how to work with ROS bags and image topics in practice: reading a rosbag in Python, locating the `sensor_msgs/CompressedImage` topic, and either extracting every frame to disk with correct reporting of image count and properties or feeding frames into a detection node. Using `cv_bridge` and decoding compressed images into OpenCV format for YOLO became a clear pipeline. Second, I learned how to integrate a deep learning model (YOLOv8) into a ROS workflow—loading the model once, running inference per frame, and drawing bounding boxes, class labels, and confidence scores on the image for a functional UI that meets the assignment’s visualisation requirements.
 
-### (b) How Did You Use AI Tools? *(2 marks)*
+### (b) How Did You Use AI Tools? 
 
 I used AI assistants to speed up package layout, launch file syntax, and parts of the detection and GUI code. The benefits were faster setup of `package.xml` and `CMakeLists.txt`, correct use of `$(arg ...)` in launch files, and a clear structure for the GUI node (file picker, popup, progress bar, trackbars). A clear limitation was that generated code had to be adapted to my environment (e.g. WSL paths, ROS Noetic, and the exact topic names in the provided bag). I still had to read and debug the scripts to understand how they work and to fix issues such as missing launch files or substitution errors. So AI tools helped with structure and boilerplate, but understanding and verifying the behaviour remained my responsibility.
 
-### (c) How to Improve Accuracy? *(2 marks)*
+### (c) How to Improve Accuracy? 
 
 Two concrete strategies would be: (1) **Use a larger or fine-tuned model.** Switching from YOLOv8n to YOLOv8m or YOLOv8l would improve recall and precision at the cost of speed. Better still, fine-tuning YOLOv8 on a dataset of aerial or roadside vehicle images would better match the viewpoint and scale of the target application (e.g. drone or dashcam), reducing missed and false detections. (2) **Improve input quality and tune the confidence threshold.** Preprocessing (e.g. denoising, contrast adjustment, or super-resolution for small vehicles) can make inputs easier for the model. Then tuning the confidence threshold (e.g. via the GUI trackbar) on a validation set would yield a better trade-off between precision and recall for the specific use case.
 
-### (d) Real-World Challenges *(2 marks)*
+### (d) Real-World Challenges 
 
 Two main challenges for deploying this pipeline on an actual drone in real time are: (1) **Latency and onboard compute.** Inference must complete within the sensor’s frame interval (e.g. 10–30 Hz) so that detections are timely for control or logging. On a constrained drone platform, this may require a smaller model (e.g. YOLOv8n), quantization, or hardware acceleration (GPU/TPU). Encoding and transmission of images or results add further delay and must be considered in the system design. (2) **Robustness under real-world conditions.** Lighting changes, motion blur, small or partially occluded vehicles, and varying backgrounds can degrade accuracy compared to offline rosbag playback. Deploying on a real drone would require testing in those conditions, possibly combining vision with other sensors (e.g. lidar or radar) and defining fallback behaviours when confidence is low or the scene is ambiguous.
 
