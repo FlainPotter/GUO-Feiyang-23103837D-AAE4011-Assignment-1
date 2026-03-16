@@ -104,14 +104,20 @@ aae4011_vehicle_detection/
 
 ## 6. Sample Results
 
-- **Image extraction summary:**  
-  *[After running `extract_images.py`, paste the terminal output here, e.g.:]*  
-  - Total frames: 1142  
-  - Resolution: 1920 x 1080 px  
-  - Topic: `/hikcamera/image_2/compressed`
+- **File selection:**
+- 
+<img width="450" height="312" alt="Select_File" src="https://github.com/user-attachments/assets/0439b9d1-3cac-43e3-9416-1c462f156956" />
 
-- **Detection results:**  
-  *[Add a screenshot of the detection UI (bounding boxes, labels, confidence, statistics) and optionally a short sentence on detection statistics.]*
+- **Image extraction summary:**
+- 
+<img width="567" height="336" alt="Info" src="https://github.com/user-attachments/assets/9096566b-8896-4765-a263-8cce46a8372f" />
+
+- **Video play & recognition:**
+- 
+<img width="2559" height="1400" alt="Demo" src="https://github.com/user-attachments/assets/c0455261-4749-4532-9845-46992d0c7249" />
+
+ 
+
 
 ---
 
